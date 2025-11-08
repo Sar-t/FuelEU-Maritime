@@ -1,12 +1,12 @@
 import { useState } from "react";
 import { BankingServiceAPI } from "../../infrastructure/BankingServiceAPI";
+import DashboardLayout from "../components/DashboardLayout";
 
 export default function BankingPage() {
   const [shipId, setShipId] = useState("S001");
   const [year, setYear] = useState(2025);
   const [data, setData] = useState<any>(null);
   const [message, setMessage] = useState("");
-
   const bankingService = new BankingServiceAPI();
 
   const fetchRecords = async () => {
@@ -27,51 +27,58 @@ export default function BankingPage() {
   };
 
   return (
-    <div>
-      <h2 className="text-xl font-semibold mb-4">Banking</h2>
-      <div className="space-x-3 mb-4">
+    <DashboardLayout title="Banking Compliance Balance">
+      <div className="flex flex-wrap items-center gap-4 mb-6">
         <input
           type="text"
           value={shipId}
           onChange={(e) => setShipId(e.target.value)}
-          className="border p-2"
           placeholder="Ship ID"
+          className="border p-2 rounded-md w-32 shadow-sm"
         />
         <input
           type="number"
           value={year}
           onChange={(e) => setYear(Number(e.target.value))}
-          className="border p-2"
           placeholder="Year"
+          className="border p-2 rounded-md w-32 shadow-sm"
         />
         <button
           onClick={fetchRecords}
-          className="bg-gray-300 px-3 py-1 rounded hover:bg-gray-400"
+          className="bg-gray-200 hover:bg-gray-300 text-gray-800 px-3 py-2 rounded-md"
         >
           Load Records
         </button>
       </div>
 
       {data && (
-        <p className="mb-2">Total Banked: <strong>{data.total_banked}</strong></p>
+        <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-4 text-blue-800">
+          <p>
+            <strong>Total Banked:</strong> {data.total_banked ?? "0"}
+          </p>
+        </div>
       )}
 
-      <div className="space-x-4">
+      <div className="flex gap-4">
         <button
           onClick={handleBank}
-          className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
+          className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md shadow-md"
         >
           Bank Surplus
         </button>
         <button
           onClick={handleApply}
-          className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700"
+          className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-md shadow-md"
         >
           Apply Banked Surplus
         </button>
       </div>
 
-      {message && <p className="mt-3 text-blue-700">{message}</p>}
-    </div>
+      {message && (
+        <p className="mt-4 text-green-700 bg-green-50 border border-green-200 p-2 rounded-lg">
+          {message}
+        </p>
+      )}
+    </DashboardLayout>
   );
 }
