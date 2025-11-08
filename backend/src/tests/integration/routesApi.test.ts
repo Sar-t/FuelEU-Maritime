@@ -11,21 +11,21 @@ afterAll(async () => {
   await pool.end();
 });
 
-describe("Routes API", () => {
-  test("GET /routes returns seeded routes", async () => {
+describe("🧭 /routes API", () => {
+  test("GET /routes should return all routes", async () => {
     const res = await request(app).get("/routes");
     expect(res.status).toBe(200);
     expect(Array.isArray(res.body)).toBe(true);
     expect(res.body.length).toBeGreaterThan(0);
   });
 
-  test("POST /routes/:id/baseline sets baseline", async () => {
-    const res = await request(app).post("/routes/R001/baseline");
+  test("POST /routes/:id/baseline should set baseline", async () => {
+    const res = await request(app).post("/routes/R002/baseline");
     expect(res.status).toBe(200);
-    expect(res.body.message).toContain("Baseline set");
+    expect(res.body.message).toContain("Baseline set for R002");
   });
 
-  test("GET /routes/comparison returns comparison data", async () => {
+  test("GET /routes/comparison should return comparison results", async () => {
     const res = await request(app).get("/routes/comparison");
     expect(res.status).toBe(200);
     expect(Array.isArray(res.body)).toBe(true);
