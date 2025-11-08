@@ -41,3 +41,6 @@ CREATE TABLE IF NOT EXISTS pool_members (
   cb_before NUMERIC(18,6),
   cb_after NUMERIC(18,6)
 );
+
+ALTER TABLE ship_compliance
+ADD CONSTRAINT uniq_ship_year UNIQUE (ship_id, year);
