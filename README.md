@@ -190,11 +190,4 @@ Cursor AI Editor for file generation and refactoring
 All outputs were validated, refactored, and tested manually.
 
 👨‍💻 Author
-
 Sarthak Tomar
-📍 Regional Manager (Marketing, Seeds Division)
-💻 Full-Stack Developer | AI-Assisted Engineer
-
-📧 sarthak.tomar@example.com
-
-🌐 LinkedIn
